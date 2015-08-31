@@ -1,0 +1,220 @@
+body {
+    background: #E5E5E5 !important;
+    transition: opacity ease-in 0.2s;
+}
+
+body[unresolved] {
+    opacity: 0;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.content {
+    padding: 15px;
+    margin: auto;
+    min-height: 800px;
+}
+
+.title h3 {
+    letter-spacing: 1px;
+    font-size: 27px;
+    margin-bottom: 17px;
+    margin-top: 17px;
+}
+
+.m7 {
+    margin-top: 7px;
+}
+
+.p7 {
+    padding: 7px;
+    height: 44px;
+}
+
+#result {
+    min-height: 0px;
+    max-height: 0px;
+    color: grey;
+    background: white;
+    position: absolute;
+    overflow: scroll;
+    width: 100%;
+    z-index: 1;
+    top: 45px;
+}
+
+#result .result-row {
+    padding: 10px;
+    margin: 0px;
+}
+
+#result h6 {
+    padding-left: 10px;
+}
+
+#result .result-row:hover {
+    background: #337ab7;
+    cursor: pointer;
+    color: white;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+*:focus {
+    box-shadow: none !important;
+    border: 0 !important;;
+}
+
+.small-text {
+    font-size: 10px;
+    padding-left: 22px !important;
+    margin-top: -2px;
+}
+
+.myBtn {
+    border: 1px solid #fff;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.resultList {
+    transition: 0.2s;
+    position: relative;
+    top: 0px;
+    width: 100%;
+    left: 0;
+    box-shadow: 2px 4px 6px -2px rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+    border: 1px solid #d8d8d8;
+    border-bottom-width: 2px;
+}
+
+.right-menu {
+    padding-right: 10px;
+    letter-spacing: 1px;
+}
+
+.btnSearch {
+    background: #72bbf2;
+    font-size: 14px;
+}
+
+.show-results {
+    transition: 0.3s;
+    z-index: 2;
+    left: 0;
+}
+
+@media screen and (max-width: 991px) {
+    .show-results {
+        transition: 0.3s;
+        z-index: 2;
+        left: 0;
+    }
+}
+
+.result-title {
+    padding-left: 10px;
+}
+
+.main-result-holder {
+    margin-top: -5px;
+}
+
+.recent-popular {
+    color: dodgerblue;
+    font-weight: bold;
+}
+
+.pl3 {
+    padding-left: 3px;
+}
+
+.result-row.active {
+    background: lightgreen;
+}
+
+.item-detail {
+    padding: 10px;
+}
+
+.underline-title {
+    border-bottom: 2px dotted dodgerblue;
+    font-size: 26px;
+}
+
+.right-btn {
+    margin-bottom: 3px;
+}
+
+.panel-content {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(218, 218, 218);
+}
+
+.fadein,
+.fadeout {
+    -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.fadein.ng-hide-remove,
+.fadeout.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    display: block !important;
+}
+
+.fadeout.ng-hide-add,
+.fadein.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+    display: block !important;
+}
+
+.mr-7 {
+    margin-right: 7px;
+}
+
+.header {
+    background: #337ab7;
+    color: white;
+    padding: 15px;
+    font-size: 27px;
+    box-shadow: 2px 4px 6px -2px rgba(0, 0, 0, 0.25);
+    border-bottom-width: 2px;
+}
+
+.card {
+    box-shadow: 2px 4px 6px -2px rgba(0, 0, 0, 0.25);
+    border-bottom-width: 2px;
+}
+
+.text-clean {
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.text-clean:hover {
+    color: #dadada;
+    text-decoration: none;
+    transition: 0.2s;
+}
