@@ -47,8 +47,7 @@
                          ng-repeat="item in items | limitTo:numberOfItems"
                          id="{{item.itemIndex}}"
                          tabindex="0"
-                         ng-keyup="tmp(item, $index, $event)"
-                         on-finish-render="callMyCustomMethod()">
+                         ng-keyup="switchItem(item, $index, $event)">
                         <div class="row">
                             <div class="col-md-12">
                                 <table width="100%" align="center" cellpadding="5px;">

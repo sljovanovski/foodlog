@@ -64,61 +64,47 @@ autoComplete.controller("SearchCtrl", function ($scope, $http, $q, $document) {
     //on input field change
     $scope.changeInput = function (event) {
 
-        var keycode = event.keyCode;
+        if (event.keyCode === 40) {
+            var firstItem = document.getElementById(0);
+            if (firstItem)
+                firstItem.focus();
 
-        var valid =
-            (keycode > 47 && keycode < 58) || // number keys
-            keycode == 32 || // spacebar
-            keycode == 8 || // backspace
-            keycode == 27 || // esc
-            keycode == 13 || // enter
-            (keycode > 64 && keycode < 91) || // letter keys
-            (keycode > 95 && keycode < 112) || // numpad keys
-            (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
-            (keycode > 218 && keycode < 223);   // [\]' (in order)
+            return false;
+        }
 
-        if (valid) {
-            var input = document.getElementById("txtFoodName");
+        var input = document.getElementById("txtFoodName");
 
+        if (input.value === "") {
+            $scope.clearList();
+
+        }
+
+        var foodList = document.getElementById("result");
+        foodList.className = "search-area";
+        foodList.style.minHeight = "570px";
+        foodList.style.maxHeight = "570px";
+        foodList.style.transition = "0.3s";
+
+        $scope.title = "";
+        $scope.btnClear = true;
+        $scope.showSpinner = true;
+
+        $scope.items = [];
+
+        var KeyID = event.keyCode; //check which key is pressed on the keyboard
+
+        if (KeyID == 27) {
+            //if ESC is pressed
+            $scope.clearList();
+            return false;
+        }
+        var promise;
+
+        if (KeyID == 8) {
+            //if backspace is pressed
             if (input.value === "") {
                 $scope.clearList();
-
-            }
-
-            var foodList = document.getElementById("result");
-            foodList.className = "search-area";
-            foodList.style.minHeight = "570px";
-            foodList.style.maxHeight = "570px";
-            foodList.style.transition = "0.3s";
-
-            $scope.title = "";
-            $scope.btnClear = true;
-            $scope.showSpinner = true;
-
-            $scope.items = [];
-
-            var KeyID = event.keyCode; //check which key is pressed on the keyboard
-
-            if (KeyID == 27) {
-                //if ESC is pressed
-                $scope.clearList();
                 return false;
-            }
-            var promise;
-
-            if (KeyID == 8) {
-                //if backspace is pressed
-                if (input.value === "") {
-                    $scope.clearList();
-                    return false;
-                } else {
-                    promise = $scope.getData(input.value);
-                    promise.then(function (data) {
-                        $scope.matchResults(data.data);
-                    }, function () {
-                        $scope.items = [];
-                    });
-                }
             } else {
                 promise = $scope.getData(input.value);
                 promise.then(function (data) {
@@ -127,6 +113,13 @@ autoComplete.controller("SearchCtrl", function ($scope, $http, $q, $document) {
                     $scope.items = [];
                 });
             }
+        } else {
+            promise = $scope.getData(input.value);
+            promise.then(function (data) {
+                $scope.matchResults(data.data);
+            }, function () {
+                $scope.items = [];
+            });
         }
     };
 
@@ -232,7 +225,7 @@ autoComplete.controller("SearchCtrl", function ($scope, $http, $q, $document) {
         }
     };
 
-    $scope.tmp = function (item, index, e) {
+    $scope.switchItem = function (item, index, e) {
         var nextId = 0;
         var element = "";
 
@@ -250,6 +243,9 @@ autoComplete.controller("SearchCtrl", function ($scope, $http, $q, $document) {
             element = document.getElementById(nextId);
             if (element)
                 element.focus();
+            else
+                document.getElementById("txtFoodName").focus();
+
         }
 
         //on Enter press
@@ -262,24 +258,4 @@ autoComplete.controller("SearchCtrl", function ($scope, $http, $q, $document) {
             $scope.clearList();
         }
     }
-
-    $scope.$on('ngRepeatFinished', function () {
-        document.getElementById(0).focus();
-    });
 });
-
-autoComplete.directive('onFinishRender', ['$timeout', '$parse', function ($timeout, $parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attr) {
-            if (scope.$last === true) {
-                $timeout(function () {
-                    scope.$emit('ngRepeatFinished');
-                    if (!!attr.onFinishRender) {
-                        $parse(attr.onFinishRender)(scope);
-                    }
-                });
-            }
-        }
-    }
-}]);
