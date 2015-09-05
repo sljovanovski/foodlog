@@ -54,6 +54,14 @@ body[unresolved] {
 }
 
 #result .result-row:hover {
+    cursor: pointer;
+}
+
+#result .result-row:focus {
+    outline: 0;
+    border: 0 solid white;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
     background: #337ab7;
     cursor: pointer;
     color: white;
